@@ -4,9 +4,30 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
     <title>Color selector</title>
   </head>
   <body>
+    <div class="interface">
+      <div class="top">
+        <p>Selected color:</p>
+        <input type="color" id="color_input" />
+      </div>
+      <div class="color_box"></div>
+      <div class="hex">
+        <p>HEX:</p>
+        <p id="hex_value"></p>
+      </div>
+      <div class="rgb">
+        <p>RGB:</p>
+        <p id="rgb_value"></p>
+      </div>
+      <div class="hsl">
+        <p>HSL:</p>
+        <p id="hsl_value"></p>
+      </div>
+    </div>
+
     <script src="script.js"></script>
   </body>
 </html>

@@ -1,0 +1,34 @@
+.interface {
+  margin-left: 3rem;
+  margin-top: 1rem;
+  max-width: 200px;
+  background-color: rgba(236, 230, 230, 0.5);
+  border-radius: 10px;
+}
+
+.top {
+  display: flex;
+  justify-content: center;
+}
+
+#color_input {
+  margin-left: 1rem;
+  margin-top: 0.5rem;
+}
+
+.color_box {
+  width: 180px;
+  height: 100px;
+  background-color: #333;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1rem;
+  border-radius: 10px;
+}
+
+.hex,
+.rgb,
+.hsl {
+  display: flex;
+  padding-left: 10px;
+}
