@@ -14,18 +14,11 @@ function colorInput() {
   document.querySelector(".color_box").style.backgroundColor = getColor;
   convertToRGB(getColor);
 }
-
+// Convert from hex to rgb
 function convertToRGB(hex) {
-  // Remove #
-  const removeFirstHex = hex.substring(1);
-
-  let rVal = removeFirstHex.substring(0, 2);
-  let gVal = removeFirstHex.substring(2, 4);
-  let bVal = removeFirstHex.substring(4, 6);
-
-  let r = parseInt(rVal, 16);
-  let g = parseInt(gVal, 16);
-  let b = parseInt(bVal, 16);
+  let r = parseInt(hex.substring(1, 3), 16);
+  let g = parseInt(hex.substring(3, 5), 16);
+  let b = parseInt(hex.substring(5, 7), 16);
 
   document.querySelector("#rgb_value").textContent = `${r}. ${g}. ${b}`;
 
@@ -39,6 +32,8 @@ function convertToRGB(hex) {
 
   return values;
 }
+
+// Convert from rgb to hsl
 
 function convertToHSL(values) {
   //   console.log(values);
@@ -81,5 +76,5 @@ function convertToHSL(values) {
   s *= 100;
   l *= 100;
 
-  document.querySelector("#hsl_value").textContent = h.toFixed() + "%. " + s.toFixed() + "%. " + l.toFixed() + "%";
+  document.querySelector("#hsl_value").textContent = h.toFixed(0) + "%. " + s.toFixed(0) + "%. " + l.toFixed(0) + "%";
 }
