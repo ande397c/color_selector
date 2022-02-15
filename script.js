@@ -1,26 +1,37 @@
 "use strict";
 window.addEventListener("load", setup);
 
-const colorSelector = document.querySelector("#color_input");
-
+// Init
 function setup() {
   console.log("setup");
-  colorSelector.addEventListener("input", colorInput);
+  document.querySelector("#color_input").addEventListener("input", getColor);
 }
 
-function colorInput() {
-  let getColor = colorSelector.value;
-  document.querySelector("#hex_value").textContent = getColor;
+// Get color from input
+function getColor() {
+  let getColor = document.querySelector("#color_input").value;
+  changeColorBox(getColor);
+}
+
+// Change color of box based on color input
+function changeColorBox(getColor) {
+  console.log(getColor);
   document.querySelector(".color_box").style.backgroundColor = getColor;
+  showHex(getColor);
+}
+
+// Display hex code based on color input
+function showHex(getColor) {
+  document.querySelector("#hex_value").textContent = getColor;
+
   convertToRGB(getColor);
 }
+
 // Convert from hex to rgb
 function convertToRGB(hex) {
   let r = parseInt(hex.substring(1, 3), 16);
   let g = parseInt(hex.substring(3, 5), 16);
   let b = parseInt(hex.substring(5, 7), 16);
-
-  document.querySelector("#rgb_value").textContent = `${r}. ${g}. ${b}`;
 
   let values = {
     r,
@@ -28,13 +39,16 @@ function convertToRGB(hex) {
     b,
   };
 
-  convertToHSL(values);
+  showRGB(values);
+}
 
-  return values;
+// Display rgb efter conversion
+function showRGB(values) {
+  document.querySelector("#rgb_value").textContent = `${values.r}. ${values.g}. ${values.b}`;
+  convertToHSL(values);
 }
 
 // Convert from rgb to hsl
-
 function convertToHSL(values) {
   //   console.log(values);
 
