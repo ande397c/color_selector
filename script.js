@@ -15,7 +15,6 @@ function getColor() {
 
 // Change color of box based on color input
 function changeColorBox(getColor) {
-  console.log(getColor);
   document.querySelector(".color_box").style.backgroundColor = getColor;
   showHex(getColor);
 }
@@ -90,5 +89,13 @@ function convertToHSL(values) {
   s *= 100;
   l *= 100;
 
-  document.querySelector("#hsl_value").textContent = h.toFixed(0) + "%. " + s.toFixed(0) + "%. " + l.toFixed(0) + "%";
+  let hslVal = h.toFixed(0) + "%. " + s.toFixed(0) + "%. " + l.toFixed(0) + "%";
+
+  showHSL(hslVal);
+}
+
+// Display hsl efter conversion
+
+function showHSL(hslVal) {
+  document.querySelector("#hsl_value").textContent = hslVal;
 }
