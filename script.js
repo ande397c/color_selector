@@ -3,34 +3,56 @@ window.addEventListener("load", setup);
 
 // Init
 function setup() {
-  console.log("setup");
-  document.querySelector("#color_input").addEventListener("input", getColor);
+  document.querySelector("#color_input").addEventListener("input", showColor);
+  showColor();
 }
 
 // Get color from input
 function getColor() {
   let getColor = document.querySelector("#color_input").value;
-  changeColorBox(getColor);
+  return getColor;
+}
+
+function showColor() {
+  let hexCode = getColor();
+  let rgbVal = convertToRGB(hexCode);
+  changeColorBox(hexCode);
+
+  let hexVal = convertToHex(rgbVal);
+  let hslVal = convertToHSL(rgbVal);
+
+  showHex(hexCode);
+  showRGB(rgbVal);
+  showHSL(hslVal);
 }
 
 // Change color of box based on color input
-function changeColorBox(getColor) {
-  document.querySelector(".color_box").style.backgroundColor = getColor;
-  showHex(getColor);
+function changeColorBox(hexVal) {
+  document.querySelector(".color_box").style.backgroundColor = hexVal;
+}
+// Convert from rgb to HEX
+function convertToHex(values) {
+  let r = values.r.toString(16);
+  let g = values.g.toString(16);
+  let b = values.b.toString(16);
+
+  let hexCode = "#" + r + g + b;
+
+  return hexCode;
 }
 
-// Display hex code based on color input
-function showHex(getColor) {
-  document.querySelector("#hex_value").textContent = getColor;
+function rgbToCssColor(values) {}
 
-  convertToRGB(getColor);
+// Display hex code based on color input
+function showHex(hexCode) {
+  document.querySelector("#hex_value").textContent = hexCode;
 }
 
 // Convert from hex to rgb
-function convertToRGB(hex) {
-  let r = parseInt(hex.substring(1, 3), 16);
-  let g = parseInt(hex.substring(3, 5), 16);
-  let b = parseInt(hex.substring(5, 7), 16);
+function convertToRGB(hexCode) {
+  let r = parseInt(hexCode.substring(1, 3), 16);
+  let g = parseInt(hexCode.substring(3, 5), 16);
+  let b = parseInt(hexCode.substring(5, 7), 16);
 
   let values = {
     r,
@@ -38,19 +60,16 @@ function convertToRGB(hex) {
     b,
   };
 
-  showRGB(values);
+  return values;
 }
 
 // Display rgb efter conversion
 function showRGB(values) {
   document.querySelector("#rgb_value").textContent = `${values.r}. ${values.g}. ${values.b}`;
-  convertToHSL(values);
 }
 
 // Convert from rgb to hsl
 function convertToHSL(values) {
-  //   console.log(values);
-
   let R = values.r;
   let G = values.g;
   let B = values.b;
@@ -89,13 +108,17 @@ function convertToHSL(values) {
   s *= 100;
   l *= 100;
 
-  let hslVal = h.toFixed(0) + "%. " + s.toFixed(0) + "%. " + l.toFixed(0) + "%";
-
-  showHSL(hslVal);
+  return {
+    h,
+    s,
+    l,
+  };
 }
 
 // Display hsl efter conversion
-
 function showHSL(hslVal) {
-  document.querySelector("#hsl_value").textContent = hslVal;
+  let h = hslVal.h.toFixed(0);
+  let s = hslVal.s.toFixed(0);
+  let l = hslVal.l.toFixed(0);
+  document.querySelector("#hsl_value").textContent = h + "%. " + s + "%. " + l + "%";
 }
